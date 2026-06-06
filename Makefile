@@ -7,7 +7,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=n2n
 PKG_VERSION:=3.0.1
-PKG_RELEASE:=5
+PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/ntop/n2n.git
@@ -39,10 +39,6 @@ define Package/n2n/description
   This package contains client node and supernode for the N2N infrastructure.
 endef
 
-define Package/n2n/conffiles
-/etc/config/n2n
-endef
-
 define Package/n2n-utils
   $(call Package/n2n/template)
   TITLE+= (Utilities)
@@ -61,9 +57,17 @@ endef
 
 define Package/n2n-utils/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/utils/n2n-benchmark $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/utils/n2n-decode $(1)/usr/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/utils/n2n-keygen $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/n2n-benchmark $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/n2n-decode $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/n2n-keygen $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/n2n-portfwd $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/n2n-route $(1)/usr/bin/
+#	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/tests-auth $(1)/usr/bin/
+#	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/tests-compress $(1)/usr/bin/
+#	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/tests-elliptic $(1)/usr/bin/
+#	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/tests-hashing $(1)/usr/bin/
+#	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/tests-transform $(1)/usr/bin/
+#	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/tests-wire $(1)/usr/bin/
 endef
 
 define Build/Configure
